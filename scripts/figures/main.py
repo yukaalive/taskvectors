@@ -105,12 +105,6 @@ def plot_accuracy_by_layer(results, model_names: List[str], normalize_x_axis: bo
 
     num_layers = {
         "llama_7B": 32,
-        "llama_13B": 40,
-        "llama_30B": 60,
-        "gpt-j_6B": 28,
-        "pythia_2.8B": 32,
-        "pythia_6.9B": 32,
-        "pythia_12B": 36,
     }
 
     # Define different markers for each model
@@ -241,7 +235,7 @@ def create_top_tokens_table(results):
         "knowledge_country_capital",
     ]
 
-    model_names = ["llama_13B", "pythia_12B", "gpt-j_6B"]
+    model_names = ["llama_7B"]
 
     df_data = {}
 
@@ -300,10 +294,10 @@ def create_all_figures(experiment_id: str):
     grouped_accuracies_df = create_grouped_accuracies_df(accuracies_df)
 
     plot_avg_accuracies_per_model(grouped_accuracies_df)
-    plot_accuracy_by_layer(results, model_names=["llama_7B", "llama_13B", "llama_30B"])
-    plot_accuracy_by_layer(
-        results, model_names=["pythia_2.8B", "pythia_6.9B", "pythia_12B", "gpt-j_6B"], filename_suffix="_appendix"
-    )
+    plot_accuracy_by_layer(results, model_names=["llama_7B"])
+    #plot_accuracy_by_layer(
+     #   results, model_names=["pythia_2.8B", "pythia_6.9B", "pythia_12B", "gpt-j_6B"], filename_suffix="_appendix"
+   # )
     create_results_latex_table(grouped_accuracies_df)
     create_top_tokens_table(results)
 

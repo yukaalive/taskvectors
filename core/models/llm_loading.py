@@ -10,7 +10,7 @@ from accelerate.utils.modeling import infer_auto_device_map, get_balanced_memory
 from core.models.utils.llm_layers import get_layers, get_layers_path
 
 BASE_KWARGS = {
-    "torch_dtype": torch.float16,
+    "torch_dtype": torch.float32,
     "trust_remote_code": True,
 }
 
@@ -20,12 +20,10 @@ GPU_KWARGS = {
     # "device_map": "auto",
 }
 
-CPU_KWARGS = {
-    **BASE_KWARGS,
-}
 
-LlamaVariant = Literal["huggingface", "vicuna"]
-LlamaSize = Literal["7B", "13B"]
+
+LlamaVariant = Literal["huggingface"]
+LlamaSize = Literal["7B"]
 
 
 def _setup_tokenizer(tokenizer: PreTrainedTokenizer) -> None:
@@ -62,7 +60,8 @@ def _get_falcon_device_map() -> dict[str, int]:
         "transformer.ln_f": 0,
     }
     num_layers = 60
-    num_layers_per_device = math.ceil(num_layers / (num_devices - 1))
+#    num_layers_per_device = math.ceil(num_layers / (num_devices - 1))
+    num_layers_per_device = 1
     device_map.update({f"transformer.h.{i}": (i // num_layers_per_device + 1) for i in range(num_layers)})
     return device_map
 
@@ -91,7 +90,8 @@ def _create_device_map(model_path: str) -> dict[str, int]:
     device_map_other = {k: 0 for k in device_map_other}
     # split the layers evenly across the other devices (1-num_devices)
     num_layers = len(device_map_layers)
-    num_layers_per_device = math.ceil(num_layers / (num_devices - 1))
+    #num_layers_per_device = math.ceil(num_layers / (num_devices - 1))
+    num_layers_per_device = 1
     device_map_layers = {k: (i // num_layers_per_device + 1) for i, k in enumerate(device_map_layers)}
 
     device_map = {**device_map_other, **device_map_layers}
@@ -99,11 +99,10 @@ def _create_device_map(model_path: str) -> dict[str, int]:
     return device_map
 
 
-def load_model(model_type: str, model_variant: str, load_to_cpu: bool = False):
-    model_path = get_model_path(model_type, model_variant)
+def load_model(model_type: str, model_variant: str):
+    model_path = "meta-llama/Llama-2-7b-hf"
 
-    kwargs = CPU_KWARGS if load_to_cpu else GPU_KWARGS
-
+    kwargs = GPU_KWARGS
     kwargs["device_map"] = _create_device_map(model_path)
 
     model = AutoModelForCausalLM.from_pretrained(model_path, **kwargs)
@@ -113,7 +112,7 @@ def load_model(model_type: str, model_variant: str, load_to_cpu: bool = False):
 
 
 def load_tokenizer(model_type: str, model_variant: str) -> PreTrainedTokenizer:
-    model_path = get_model_path(model_type, model_variant)
+    model_path = "meta-llama/Llama-2-7b-hf"
 
     tokenizer = AutoTokenizer.from_pretrained(model_path, padding_side="left")
     _setup_tokenizer(tokenizer)
@@ -122,51 +121,17 @@ def load_tokenizer(model_type: str, model_variant: str) -> PreTrainedTokenizer:
 
 
 def load_model_and_tokenizer(
-    model_type: str, model_variant: str, load_to_cpu: bool = False
+    model_type: str, model_variant: str
 ) -> Tuple[PreTrainedModel, PreTrainedTokenizer]:
     tokenizer = load_tokenizer(model_type, model_variant)
-    model = load_model(model_type, model_variant, load_to_cpu=load_to_cpu)
+    model = load_model(model_type, model_variant)
 
     return model, tokenizer
 
 
 MODEL_PATHS = {
-    "pythia": {
-        "1.4B": "EleutherAI/pythia-1.4b",
-        "2.8B": "EleutherAI/pythia-2.8b",
-        "6.9B": "EleutherAI/pythia-6.9b",
-        "12B": "EleutherAI/pythia-12b",
-    },
+
     "llama": {
         "7B": llama_local_path("huggingface", "7B"),
-        "13B": llama_local_path("huggingface", "13B"),
-        "30B": llama_local_path("huggingface", "30B"),
-        "65B": llama_local_path("huggingface", "65B"),
-    },
-    "falcon": {
-        "7B": "tiiuae/falcon-7b",
-        "40B": "tiiuae/falcon-40b",
-    },
-    "gpt-j": {
-        "6B": "EleutherAI/gpt-j-6B",
-    },
-    "gpt-2": {
-        "0.35B": "gpt2-medium",
-        "0.77B": "gpt2-large",
-        "1.5B": "gpt2-xl",
-    },
-    "mpt": {
-        "7B": "mosaicml/mpt-7b",
-    },
-    "gpt-neox": {
-        "20B": "EleutherAI/gpt-neox-20b",
-    },
-    "starcoder": {
-        "regular": "bigcode/starcoder",
-        "plus": "bigcode/starcoderplus",
-    },
-    "cerebras-gpt": {
-        "6.7B": "cerebras/Cerebras-GPT-6.7B",
-        "13B": "cerebras/Cerebras-GPT-13B",
-    },
+    }
 }
