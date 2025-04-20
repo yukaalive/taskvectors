@@ -7,12 +7,6 @@ from scripts.utils import main_experiment_results_dir, overriding_experiment_res
 
 MODEL_DISPLAY_NAME_MAPPING = {
     "llama_7B": "LLaMA 7B",
-    "llama_13B": "LLaMA 13B",
-    "llama_30B": "LLaMA 30B",
-    "gpt-j_6B": "GPT-J 6B",
-    "pythia_2.8B": "Pythia 2.8B",
-    "pythia_6.9B": "Pythia 6.9B",
-    "pythia_12B": "Pythia 12B",
 }
 
 

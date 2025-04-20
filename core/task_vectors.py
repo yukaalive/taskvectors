@@ -208,6 +208,19 @@ def modulated_forward(
     batch_size: Optional[int] = None,
     past_key_values: Optional[Tuple[Tuple[torch.FloatTensor]]] = None,
 ):
+    device = model.device
+
+    # 入力とタスク隠れ層をデバイスに移動
+    inputs = {k: v.to(device) if isinstance(v, torch.Tensor) else v for k, v in inputs.items()}
+    task_hiddens = task_hiddens.to(device)
+
+    # past_key_valuesをデバイスに移動（ここを追加）
+    if past_key_values is not None:
+        past_key_values = nested_apply(
+            past_key_values, 
+            lambda x: x.to(device) if isinstance(x, torch.Tensor) else x
+        )
+
     # TODO: move all this to the HiddenInjector class
     if isinstance(intermediate_layer, int):
         intermediate_layer = torch.tensor(intermediate_layer).repeat(len(inputs["input_ids"]))
@@ -245,18 +258,32 @@ def task_vector_accuracy_by_layer(
     layers_to_test: Optional[Iterable[int]] = None,
     multi_context: bool = False,
 ) -> Dict[int, float]:
+    
+    device = model.device
+
     if layers_to_test is None:
         num_layers = len(get_layers(model))
         layers_to_test = range(num_layers)
 
     # Get task hiddens
     task_hiddens = get_task_hiddens(model, tokenizer, task, datasets, multi_context=multi_context)
+    # GPUに移動
+    task_hiddens = task_hiddens.to(device)
 
     # Get input past_key_values
     inputs = tokenize_datasets(tokenizer, datasets, format_dataset_kwargs={"include_train": False})
+    inputs = {k: v.to(device) if isinstance(v, torch.Tensor) else v for k, v in inputs.items()}
+
     outputs = batch_forward(model, inputs=inputs, forward_kwargs={"use_cache": True})
     past_key_values = outputs.past_key_values
-    past_key_values = nested_apply(past_key_values, lambda x: x[:, :, :-1])  # remove last token from past_key_values
+    #past_key_values = nested_apply(past_key_values, lambda x: x[:, :, :-1])  # remove last token from past_key_values
+
+    #★past_key_valuesをモデルのデバイスに移動して、最後のトークン削除
+    past_key_values = nested_apply(
+    past_key_values, 
+    lambda x: x.to(device)[:, :, :-1] if isinstance(x, torch.Tensor) else x
+    )
+
     inputs["input_ids"] = inputs["input_ids"][:, -1].unsqueeze(1)
 
     # Find best intermediate layer using dev set
