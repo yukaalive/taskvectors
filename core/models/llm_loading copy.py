@@ -23,7 +23,7 @@ GPU_KWARGS = {
 
 
 LlamaVariant = Literal["huggingface"]
-LlamaSize = Literal["7B","13B"]
+LlamaSize = Literal["7B"]
 
 
 def _setup_tokenizer(tokenizer: PreTrainedTokenizer) -> None:
@@ -100,9 +100,7 @@ def _create_device_map(model_path: str) -> dict[str, int]:
 
 
 def load_model(model_type: str, model_variant: str):
-    # model_path = "meta-llama/Llama-2-7b-hf"
-    model_path = MODEL_PATHS[model_type][model_variant]
-    model_paty = get_model_path(model_type, model_variant)
+    model_path = "meta-llama/Llama-2-7b-hf"
 
     kwargs = GPU_KWARGS
     kwargs["device_map"] = _create_device_map(model_path)
@@ -114,9 +112,8 @@ def load_model(model_type: str, model_variant: str):
 
 
 def load_tokenizer(model_type: str, model_variant: str) -> PreTrainedTokenizer:
-    # model_path = "meta-llama/Llama-2-7b-hf"
-    model_path = MODEL_PATHS[model_type][model_variant]
-    model_paty = get_model_path(model_type, model_variant)
+    model_path = "meta-llama/Llama-2-7b-hf"
+
     tokenizer = AutoTokenizer.from_pretrained(model_path, padding_side="left")
     _setup_tokenizer(tokenizer)
 
@@ -131,12 +128,10 @@ def load_model_and_tokenizer(
 
     return model, tokenizer
 
+
 MODEL_PATHS = {
+
     "llama": {
-        "7B": "meta-llama/Llama-2-7b-hf",
-        "13B": "meta-llama/Llama-2-13b-hf"
-    },
-    "minillm": {
-        "7B": "MiniLLM/MiniLLM-Llama-7B"
+        "7B": llama_local_path("huggingface", "7B"),
     }
 }

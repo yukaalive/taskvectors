@@ -7,6 +7,9 @@ from scripts.utils import main_experiment_results_dir, overriding_experiment_res
 
 MODEL_DISPLAY_NAME_MAPPING = {
     "llama_7B": "LLaMA 7B",
+    'llama_13B': 'LLaMA 13B',
+    'minillm_7B': 'MiniLLM 7B', 
+
 }
 
 

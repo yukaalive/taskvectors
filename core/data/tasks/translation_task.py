@@ -14,12 +14,21 @@ from typing import Any
 class TranslationTask(MappingTask):
     @staticmethod
     def _get_synonyms(word: str, lang_to: str):
+        # 文章レベルの場合は完全一致のみを許可
+        if len(word.split()) > 1:
+            return [word]
+
+        # 日本語の場合は完全一致のみを許可（WordNetは日本語をサポートしていない）
+        if lang_to == "ja":
+            return [word]
+
         lang = {
             "en": "eng",
             "fr": "fra",
             "it": "ita",
             "es": "spa",
         }[lang_to]
+        
         synonyms = [word]
         for syn in wn.synsets(word, lang=lang):
             for lemma in syn.lemmas(lang=lang):

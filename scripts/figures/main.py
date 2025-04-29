@@ -105,6 +105,8 @@ def plot_accuracy_by_layer(results, model_names: List[str], normalize_x_axis: bo
 
     num_layers = {
         "llama_7B": 32,
+        "llama_7B": 32,
+        "llama_13B": 32,
     }
 
     # Define different markers for each model
@@ -228,14 +230,39 @@ def create_results_latex_table(grouped_accuracies_df):
 def create_top_tokens_table(results):
     # Top Tokens
 
+    # task_names = [
+    #     "algorithmic_prev_letter",
+    #     # "translation_ja_en",
+    #     "translation_fr_en",
+    #     "linguistic_present_simple_gerund",
+    #     #"knowledge_country_capital",
+        
+    # ]
     task_names = [
-        "algorithmic_prev_letter",
         "translation_fr_en",
         "linguistic_present_simple_gerund",
-        "knowledge_country_capital",
+        #"knowledge_country_capital",
+        "algorithmic_next_letter",
+        # Translation
+        "translation_es_en",
+        "translation_en_fr",
+        "translation_en_es",
+        # Linguistic
+        "linguistic_present_simple_past_simple",
+        "linguistic_plural_singular",
+        "linguistic_antonyms",
+        # Knowledge
+        # "knowledge_person_language",
+        # "knowledge_location_continent",
+        # "knowledge_location_religion",
+        # Algorithmic
+        "algorithmic_prev_letter",
+            "algorithmic_list_first",
+            "algorithmic_list_last",
+            "algorithmic_to_upper",
+            "algorithmic_to_lower",
     ]
-
-    model_names = ["llama_7B"]
+    model_names = ["llama_7B","minillm_7B","llama_13B"]
 
     df_data = {}
 
@@ -294,7 +321,7 @@ def create_all_figures(experiment_id: str):
     grouped_accuracies_df = create_grouped_accuracies_df(accuracies_df)
 
     plot_avg_accuracies_per_model(grouped_accuracies_df)
-    plot_accuracy_by_layer(results, model_names=["llama_7B"])
+    plot_accuracy_by_layer(results, model_names=["llama_7B","minillm_7B","llama_13B"])
     #plot_accuracy_by_layer(
      #   results, model_names=["pythia_2.8B", "pythia_6.9B", "pythia_12B", "gpt-j_6B"], filename_suffix="_appendix"
    # )
