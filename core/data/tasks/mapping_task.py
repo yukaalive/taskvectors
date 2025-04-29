@@ -7,11 +7,11 @@ from core import config
 from core.data.tasks.task import Task
 from transformers import PreTrainedTokenizer
 
-MIN_NUM_EXAMPLES = 70
+MIN_NUM_EXAMPLES = 1  # 文章データセットの場合、1例でも許可
 
 
 def _is_single_token(tokenizer: PreTrainedTokenizer, token: str) -> bool:
-    return len(tokenizer.tokenize(f"!{token}")) == 2  # this is a hack, might not work for all tokenizers
+    return len(tokenizer.tokenize(f"!{token}")) == 2
 
 
 def filter_single_token_outputs(tokenizer: PreTrainedTokenizer, mapping: Dict[str, str]) -> Dict[str, str]:
@@ -25,21 +25,22 @@ class MappingTask(Task):
         mapping_type: str,
         mapping_name: str,
         allow_prefix: bool = False,
+        is_sentence_level: bool = False,  # 文章レベルのマッピングかどうかのフラグを追加
     ):
         super().__init__(tokenizer)
         self.mapping_type = mapping_type
         self.mapping_name = mapping_name
         self.allow_prefix = allow_prefix
+        self.is_sentence_level = is_sentence_level
 
         mapping_file = os.path.join(config.DATA_DIR, mapping_type, f"{mapping_name}.json")
         with open(mapping_file) as f:
             mapping = json.load(f)
 
-        if allow_prefix:
+        if allow_prefix or is_sentence_level:  # 文章レベルの場合はフィルタリングをスキップ
             self.mapping = mapping
         else:
             num_before_filter = len(mapping)
-
             mapping_leading_space = {f" {k}": f" {v}" for k, v in mapping.items()}
 
             filtered_mapping = filter_single_token_outputs(tokenizer, mapping)
