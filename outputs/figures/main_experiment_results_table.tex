@@ -19,56 +19,32 @@ Model & Task type & Task name &  &  &  \\
 \midrule
     \endhead
     
-\multirow[t]{14}{*}{LLaMA 13B} & \multirow[t]{6}{*}{Algorithmic} & List first & 0.67 & 0.96 & 1.00 \\
- &  & List last & 0.01 & 1.00 & 1.00 \\
- &  & Next letter & 0.17 & 0.94 & 0.96 \\
- &  & Prev letter & 0.06 & 0.18 & 0.28 \\
- &  & To lower & 0.00 & 0.96 & 1.00 \\
- &  & To upper & 0.00 & 0.90 & 1.00 \\
-\cline{2-6}
- & \multirow[t]{4}{*}{Linguistic} & Antonyms & 0.33 & 0.82 & 0.90 \\
- &  & Plural singular & 0.15 & 0.90 & 0.92 \\
- &  & Present simple gerund & 0.00 & 0.70 & 0.96 \\
- &  & Present simple past simple & 0.01 & 0.92 & 0.94 \\
-\cline{2-6}
- & \multirow[t]{4}{*}{Translation} & En es & 0.05 & 0.68 & 0.78 \\
- &  & En fr & 0.11 & 0.68 & 0.94 \\
- &  & Es en & 0.02 & 0.78 & 0.90 \\
- &  & Fr en & 0.06 & 0.78 & 0.88 \\
+\multirow[t]{2}{*}{GPT-J 6B} & \multirow[t]{2}{*}{Translation} & En ja & 0.00 & 0.76 & 0.88 \\
+ &  & Ja en & 0.00 & 0.84 & 0.88 \\
 \cline{1-6} \cline{2-6}
-\multirow[t]{14}{*}{LLaMA 7B} & \multirow[t]{6}{*}{Algorithmic} & List first & 0.90 & 0.98 & 1.00 \\
- &  & List last & 0.02 & 0.98 & 0.94 \\
- &  & Next letter & 0.10 & 0.98 & 0.94 \\
- &  & Prev letter & 0.00 & 0.24 & 0.36 \\
- &  & To lower & 0.00 & 1.00 & 1.00 \\
- &  & To upper & 0.00 & 0.86 & 1.00 \\
-\cline{2-6}
- & \multirow[t]{4}{*}{Linguistic} & Antonyms & 0.25 & 0.86 & 0.82 \\
- &  & Plural singular & 0.20 & 0.84 & 0.92 \\
- &  & Present simple gerund & 0.00 & 0.86 & 0.94 \\
- &  & Present simple past simple & 0.01 & 0.86 & 0.90 \\
-\cline{2-6}
- & \multirow[t]{4}{*}{Translation} & En es & 0.05 & 0.76 & 0.80 \\
- &  & En fr & 0.06 & 0.88 & 0.94 \\
- &  & Es en & 0.17 & 0.76 & 0.90 \\
- &  & Fr en & 0.16 & 0.72 & 0.82 \\
+\multirow[t]{2}{*}{Llama 13B} & \multirow[t]{2}{*}{Translation} & En ja & 0.00 & 0.70 & 0.82 \\
+ &  & Ja en & 0.03 & 0.88 & 0.90 \\
 \cline{1-6} \cline{2-6}
-\multirow[t]{14}{*}{MiniLLM 7B} & \multirow[t]{6}{*}{Algorithmic} & List first & 0.90 & 0.88 & 1.00 \\
- &  & List last & 0.05 & 0.92 & 1.00 \\
- &  & Next letter & 0.12 & 1.00 & 0.94 \\
- &  & Prev letter & 0.07 & 0.32 & 0.48 \\
- &  & To lower & 0.00 & 0.50 & 1.00 \\
- &  & To upper & 0.00 & 0.50 & 1.00 \\
-\cline{2-6}
- & \multirow[t]{4}{*}{Linguistic} & Antonyms & 0.34 & 0.86 & 0.86 \\
- &  & Plural singular & 0.14 & 0.82 & 0.88 \\
- &  & Present simple gerund & 0.00 & 0.84 & 0.94 \\
- &  & Present simple past simple & 0.01 & 0.84 & 0.90 \\
-\cline{2-6}
- & \multirow[t]{4}{*}{Translation} & En es & 0.08 & 0.66 & 0.72 \\
- &  & En fr & 0.10 & 0.88 & 0.94 \\
- &  & Es en & 0.20 & 0.84 & 0.92 \\
- &  & Fr en & 0.18 & 0.70 & 0.84 \\
+\multirow[t]{2}{*}{Llama 7B} & \multirow[t]{2}{*}{Translation} & En ja & 0.00 & 0.68 & 0.86 \\
+ &  & Ja en & 0.00 & 0.86 & 0.90 \\
+\cline{1-6} \cline{2-6}
+\multirow[t]{2}{*}{Pythia 12B} & \multirow[t]{2}{*}{Translation} & En ja & 0.00 & 0.56 & 0.64 \\
+ &  & Ja en & 0.00 & 0.94 & 0.94 \\
+\cline{1-6} \cline{2-6}
+\multirow[t]{2}{*}{Pythia 2.8B} & \multirow[t]{2}{*}{Translation} & En ja & 0.00 & 0.48 & 0.62 \\
+ &  & Ja en & 0.00 & 0.88 & 0.90 \\
+\cline{1-6} \cline{2-6}
+\multirow[t]{2}{*}{Quen 14B} & \multirow[t]{2}{*}{Translation} & En ja & 0.00 & 0.58 & 0.76 \\
+ &  & Ja en & 0.00 & 0.82 & 0.92 \\
+\cline{1-6} \cline{2-6}
+\multirow[t]{2}{*}{Shallow 7B} & \multirow[t]{2}{*}{Translation} & En ja & 0.00 & 0.80 & 0.86 \\
+ &  & Ja en & 0.00 & 0.84 & 0.92 \\
+\cline{1-6} \cline{2-6}
+\multirow[t]{2}{*}{Xalma 13B} & \multirow[t]{2}{*}{Translation} & En ja & 0.00 & 0.84 & 0.86 \\
+ &  & Ja en & 0.00 & 0.82 & 0.88 \\
+\cline{1-6} \cline{2-6}
+\multirow[t]{2}{*}{Youko 8B} & \multirow[t]{2}{*}{Translation} & En ja & 0.00 & 0.90 & 0.90 \\
+ &  & Ja en & 0.00 & 0.92 & 0.92 \\
 \cline{1-6} \cline{2-6}
 \bottomrule
 \end{longtable}

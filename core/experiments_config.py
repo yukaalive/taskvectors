@@ -4,7 +4,7 @@ TASKS_TO_EVALUATE = [
 ]
 
 MODELS_TO_EVALUATE = [
-    ("youko","8B"),
+     ("youko","8B"),
     ("quen","14B"),
     # ("nekomata","7B"),
     # ("llm-jp","13B"),

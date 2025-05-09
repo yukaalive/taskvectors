@@ -6,10 +6,15 @@ import pandas as pd
 from scripts.utils import main_experiment_results_dir, overriding_experiment_results_dir
 
 MODEL_DISPLAY_NAME_MAPPING = {
-    "llama_7B": "LLaMA 7B",
-    'llama_13B': 'LLaMA 13B',
-    'minillm_7B': 'MiniLLM 7B', 
-
+    "gpt-j_6B": "GPT-J 6B",
+    "llama_7B": "Llama 7B",
+    "llama_13B": "Llama 13B",
+    "pythia_2.8B": "Pythia 2.8B",
+    "pythia_12B": "Pythia 12B",
+    "shallow_7B": "Shallow 7B",
+    "xalma_13B": "Xalma 13B",
+    "youko_8B": "Youko 8B",
+    "quen_14B": "Quen 14B"
 }
 
 

@@ -101,7 +101,7 @@ def plot_accuracy_by_layer(results, model_names: List[str], normalize_x_axis: bo
 
     plt.title(f"Average Accuracy by Layer")
 
-    regular_accuracy_threshold = 0.75
+    regular_accuracy_threshold = 0.20
 
     num_layers = {
         "llama_7B": 32,
@@ -110,7 +110,8 @@ def plot_accuracy_by_layer(results, model_names: List[str], normalize_x_axis: bo
     }
 
     # Define different markers for each model
-    markers = ["o", "^", "s", "P", "X", "D", "v"]
+#    markers = ["o", "^", "s", "P", "X", "D", "v"]
+    markers = ["o", "^", "s", "P", "X", "D", "v", "*", "p", "h"] 
 
     for idx, model_name in enumerate(model_names):
         min_num_layers = min(
@@ -230,39 +231,36 @@ def create_results_latex_table(grouped_accuracies_df):
 def create_top_tokens_table(results):
     # Top Tokens
 
+    task_names = [
+        "translation_ja_en",
+        "translation_en_ja",
+        
+    ]
     # task_names = [
-    #     "algorithmic_prev_letter",
-    #     # "translation_ja_en",
     #     "translation_fr_en",
     #     "linguistic_present_simple_gerund",
     #     #"knowledge_country_capital",
-        
+    #     "algorithmic_next_letter",
+    #     # Translation
+    #     "translation_es_en",
+    #     "translation_en_fr",
+    #     "translation_en_es",
+    #     # Linguistic
+    #     "linguistic_present_simple_past_simple",
+    #     "linguistic_plural_singular",
+    #     "linguistic_antonyms",
+    #     # Knowledge
+    #     # "knowledge_person_language",
+    #     # "knowledge_location_continent",
+    #     # "knowledge_location_religion",
+    #     # Algorithmic
+    #     "algorithmic_prev_letter",
+    #         "algorithmic_list_first",
+    #         "algorithmic_list_last",
+    #         "algorithmic_to_upper",
+    #         "algorithmic_to_lower",
     # ]
-    task_names = [
-        "translation_fr_en",
-        "linguistic_present_simple_gerund",
-        #"knowledge_country_capital",
-        "algorithmic_next_letter",
-        # Translation
-        "translation_es_en",
-        "translation_en_fr",
-        "translation_en_es",
-        # Linguistic
-        "linguistic_present_simple_past_simple",
-        "linguistic_plural_singular",
-        "linguistic_antonyms",
-        # Knowledge
-        # "knowledge_person_language",
-        # "knowledge_location_continent",
-        # "knowledge_location_religion",
-        # Algorithmic
-        "algorithmic_prev_letter",
-            "algorithmic_list_first",
-            "algorithmic_list_last",
-            "algorithmic_to_upper",
-            "algorithmic_to_lower",
-    ]
-    model_names = ["llama_7B","minillm_7B","llama_13B"]
+    model_names = ["gpt-j_6B", "llama_7B", "llama_13B", "pythia_2.8B","pythia_12B", "shallow_7B", "xalma_13B", "youko_8B", "quen_14B"]
 
     df_data = {}
 
@@ -321,7 +319,7 @@ def create_all_figures(experiment_id: str):
     grouped_accuracies_df = create_grouped_accuracies_df(accuracies_df)
 
     plot_avg_accuracies_per_model(grouped_accuracies_df)
-    plot_accuracy_by_layer(results, model_names=["llama_7B","minillm_7B","llama_13B"])
+    plot_accuracy_by_layer(results, model_names=["gpt-j_6B", "llama_7B", "llama_13B", "pythia_2.8B","pythia_12B", "shallow_7B", "xalma_13B", "youko_8B", "quen_14B"])
     #plot_accuracy_by_layer(
      #   results, model_names=["pythia_2.8B", "pythia_6.9B", "pythia_12B", "gpt-j_6B"], filename_suffix="_appendix"
    # )
