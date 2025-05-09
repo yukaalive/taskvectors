@@ -1,5 +1,4 @@
 TASKS_TO_EVALUATE = [
-    # One for each category
     "translation_ja_en",
     "translation_en_ja",
 ]
