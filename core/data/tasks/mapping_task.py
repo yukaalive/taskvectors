@@ -59,6 +59,8 @@ class MappingTask(Task):
 
     def sample_inputs(self, num_inputs: int, exclude: List[str] = ()) -> List[str]:
         input_space = list(self.mapping.keys())
+        # 集合の差集合演算により、input_spaceからexcludeを除外
+        # num_inputs個(5)の要素をランダムに選択
         return random.sample(set(input_space) - set(exclude), num_inputs)
 
     def calc_output(self, inp) -> str:

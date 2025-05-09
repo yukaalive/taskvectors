@@ -8,7 +8,9 @@ from core.data.tasks.task import Task
 
 def calculate_accuracy(task: Task, predictions: List[str], expected_outputs: List[str]) -> List[bool]:
     correct = _evaluate_predictions(task, predictions, expected_outputs)
+
     accuracy = correct.mean()
+    print(f"Accuracy: {accuracy:.2f}")
     return accuracy
 
 
@@ -21,6 +23,8 @@ def print_evaluation_summary(task: Task, predictions: List[str], datasets: List[
     expected_outputs = [dataset.test_output for dataset in datasets]
     inputs = [dataset.test_input for dataset in datasets]
     correct = _evaluate_predictions(task, predictions, expected_outputs)
+
+
     accuracy = correct.mean()
 
     print("Out:\t", predictions)
@@ -51,10 +55,11 @@ def print_evaluation_summary(task: Task, predictions: List[str], datasets: List[
 def _evaluate_predictions(task: Task, predictions: List[str], expected_outputs: List[str]) -> List[bool]:
     predictions = _strip_whitespace(predictions)
     expected_outputs = _strip_whitespace(expected_outputs)
-
+    print(f"predictions: {predictions}")
+    print(f"expected_outputs: {expected_outputs}")
     vectorized_compare = np.vectorize(task.compare_outputs)
     correct = vectorized_compare(predictions, expected_outputs)
-
+    print(f"correct: {correct}")
     return correct
 
 

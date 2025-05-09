@@ -39,17 +39,18 @@ class Task(ABC):
 
     def create_dataset(self, num_examples: int, test_input: Optional[Any] = None) -> FewShotDataset:
         if test_input is None:
+            # テストクエリをランダムに1つサンプリング
             test_input = self.sample_inputs(1)[0]
         test_output = self.calc_test_output(test_input)
 
         train_inputs = self.sample_inputs(num_examples, exclude=[test_input])
         train_outputs = [self.calc_output(x) for x in train_inputs]
-
         train_inputs = [str(x) for x in train_inputs]
         train_outputs = [str(x) for x in train_outputs]
         test_input = str(test_input)
         test_output = str(test_output)
-
+        # print(f"train_inputs: {train_inputs}")
+        # print(f"train_outputs: {train_outputs}")
         return FewShotDataset(
             train_inputs,
             train_outputs,

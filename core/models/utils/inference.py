@@ -111,7 +111,7 @@ def batch_forward(
             output_class = out.__class__
             out = nested_apply(out, lambda t: t.cpu())
         outputs.append(out)
-
+    # print(f"batch_forward type: {type(outputs[0])}")
     return output_class(**nested_concat(outputs))
 
 
@@ -184,6 +184,15 @@ def tokenize_prompts(tokenizer: PreTrainedTokenizer, prompts: List[str]) -> torc
     return tokenizer(prompts, return_tensors="pt", padding=True, return_token_type_ids=False)
 
 
+# def tokenize_datasets(
+#     tokenizer: PreTrainedTokenizer,
+#     datasets: List[FewShotDataset],
+#     few_shot_format: FewShotFormat = FewShotFormat(),
+#     format_dataset_kwargs: Optional[dict] = {},
+# ) -> torch.Tensor:
+#     prompts = few_shot_format.format_datasets(datasets, **format_dataset_kwargs)
+#     return tokenize_prompts(tokenizer, prompts)
+
 def tokenize_datasets(
     tokenizer: PreTrainedTokenizer,
     datasets: List[FewShotDataset],
@@ -191,9 +200,14 @@ def tokenize_datasets(
     format_dataset_kwargs: Optional[dict] = {},
 ) -> torch.Tensor:
     prompts = few_shot_format.format_datasets(datasets, **format_dataset_kwargs)
-    return tokenize_prompts(tokenizer, prompts)
-
-
+    result = tokenize_prompts(tokenizer, prompts)
+    
+    # token_type_idsを削除
+    if "token_type_ids" in result:
+        del result["token_type_ids"]
+    
+    return result
+    
 def hidden_to_logits(model: PreTrainedModel, hidden: torch.Tensor) -> torch.Tensor:
     device = model.device
 
