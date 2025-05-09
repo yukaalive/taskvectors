@@ -104,7 +104,9 @@ def load_model(model_type: str, model_variant: str):
     model_path = MODEL_PATHS[model_type][model_variant]
     model_paty = get_model_path(model_type, model_variant)
 
-    kwargs = GPU_KWARGS
+    kwargs = GPU_KWARGS.copy()  # 元のディクショナリをコピー
+    
+    # nekomataモデルの場合、trust_remote_code=Trueを追加（すでにBASE_KWARGSに含まれている）
     kwargs["device_map"] = _create_device_map(model_path)
 
     model = AutoModelForCausalLM.from_pretrained(model_path, **kwargs)
@@ -117,7 +119,14 @@ def load_tokenizer(model_type: str, model_variant: str) -> PreTrainedTokenizer:
     # model_path = "meta-llama/Llama-2-7b-hf"
     model_path = MODEL_PATHS[model_type][model_variant]
     model_paty = get_model_path(model_type, model_variant)
-    tokenizer = AutoTokenizer.from_pretrained(model_path, padding_side="left")
+    #tokenizer = AutoTokenizer.from_pretrained(model_path, padding_side="left")
+    
+    # nekomataモデルの場合だけtrust_remote_code=Trueを追加
+    if model_type == "nekomata":
+        tokenizer = AutoTokenizer.from_pretrained(model_path, padding_side="left", trust_remote_code=True)
+    else:
+        tokenizer = AutoTokenizer.from_pretrained(model_path, padding_side="left")
+        
     _setup_tokenizer(tokenizer)
 
     return tokenizer
@@ -138,5 +147,30 @@ MODEL_PATHS = {
     },
     "minillm": {
         "7B": "MiniLLM/MiniLLM-Llama-7B"
+    },
+    "quen":{
+        "14B": "cyberagent/DeepSeek-R1-Distill-Qwen-14B-Japanese"
+    },
+    "youko":{
+        "8B": "rinna/llama-3-youko-8b"
+    },  
+    "nekomata":{
+        "7B": "rinna/nekomata-7b"
+    },
+    "llm-jp":{
+        "13B":"llm-jp/llm-jp-13b-v2.0"
+    },
+    "shallow":{
+        "7B":"tokyotech-llm/Swallow-7b-hf"
+    },
+    "xalma":{
+        "13B":"haoranxu/X-ALMA-13B-Group6"
+    },
+    "gpt-j":{
+        "6B":"EleutherAI/gpt-j-6b"
+    },
+    "pythia":{
+        "2.8B":"EleutherAI/pythia-2.8b",
+        "12B":"EleutherAI/pythia-12b"
     }
 }

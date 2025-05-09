@@ -25,6 +25,10 @@ ALL_TASKS = {
         "task_type": "translation",
         "task_kwargs": {"mapping_type": "translation", "mapping_name": "ja_en"},
     },
+    "translation_en_ja": {
+        "task_type": "translation",
+        "task_kwargs": {"mapping_type": "translation", "mapping_name": "en_ja"},
+    },
     # Algorithmic
     "algorithmic_next_letter": {
         "task_type": "increment",

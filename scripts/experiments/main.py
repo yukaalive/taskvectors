@@ -52,10 +52,10 @@ def evaluate_task(model: PreTrainedModel, tokenizer: PreTrainedTokenizer, task_n
         test_datasets,
         dev_datasets,
     )
+    print("tv_dev_by_layer")
     accuracies["tv_dev_by_layer"] = tv_dev_accuracy_by_layer
     accuracies["icl"] = calculate_accuracy_on_datasets(task, icl_predictions, test_datasets)
     accuracies["tv"] = calculate_accuracy_on_datasets(task, tv_predictions, test_datasets)
-
     tv_ordered_tokens_by_layer = {}
     try:
         for layer_num in tv_dev_accuracy_by_layer.keys():

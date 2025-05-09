@@ -1,3 +1,17 @@
+./run_script.sh experiments.main
+
+
+
+
+
+
+
+
+
+
+
+
+
 # In-Context Learning Creates Task Vectors
 This is the official code repository for the paper [In-Context Learning Creates Task Vectors](https://arxiv.org/abs/2310.15916), Roee Hendel, Mor Geva, Amir Globerson. 2023.
 
@@ -66,3 +80,30 @@ To run the task vector robustness experiment, and generate the figures from the 
 ```
 This will run the python file [scripts/experiments/task_vector_robustness.py](scripts/experiments/task_vector_robustness.py).
 The figures will be saved to `outputs/figures`.
+
+
+
+
+
+#     "translation_fr_en",
+#     "linguistic_present_simple_gerund",
+#     #"knowledge_country_capital",
+#     "algorithmic_next_letter",
+#     # Translation
+#     "translation_es_en",
+#     "translation_en_fr",
+#     "translation_en_es",
+#     # Linguistic
+#     "linguistic_present_simple_past_simple",
+#     "linguistic_plural_singular",
+#     "linguistic_antonyms",
+#     # Knowledge
+#     # "knowledge_person_language",
+#     # "knowledge_location_continent",
+#     # "knowledge_location_religion",
+#     # Algorithmic
+#     "algorithmic_prev_letter",
+#     "algorithmic_list_first",
+#     "algorithmic_list_last",
+#     "algorithmic_to_upper",
+#     "algorithmic_to_lower",
