@@ -7,14 +7,16 @@ from scripts.utils import main_experiment_results_dir, overriding_experiment_res
 
 MODEL_DISPLAY_NAME_MAPPING = {
     "gpt-j_6B": "GPT-J 6B",
-    "llama_7B": "Llama 7B",
-    "llama_13B": "Llama 13B",
+    "llama_7B": "Llama2 7B",
+    "llama_13B": "Llama2 13B",
     "pythia_2.8B": "Pythia 2.8B",
     "pythia_12B": "Pythia 12B",
-    "shallow_7B": "Shallow 7B",
+    "swallow_7B": "Swallow 7B",
     "xalma_13B": "Xalma 13B",
     "youko_8B": "Youko 8B",
-    "quen_14B": "Quen 14B"
+    "Qwen_j_14B": "Qwen 14B_j",
+    "Qwen_14B": "Qwen 14B",
+
 }
 
 

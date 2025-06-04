@@ -148,8 +148,10 @@ MODEL_PATHS = {
     "minillm": {
         "7B": "MiniLLM/MiniLLM-Llama-7B"
     },
-    "quen":{
-        "14B": "cyberagent/DeepSeek-R1-Distill-Qwen-14B-Japanese"
+    "Qwen":{
+        "14B_j": "cyberagent/DeepSeek-R1-Distill-Qwen-14B-Japanese",
+        "14B" : "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B"
+        
     },
     "youko":{
         "8B": "rinna/llama-3-youko-8b"
@@ -160,7 +162,7 @@ MODEL_PATHS = {
     "llm-jp":{
         "13B":"llm-jp/llm-jp-13b-v2.0"
     },
-    "shallow":{
+    "swallow":{
         "7B":"tokyotech-llm/Swallow-7b-hf"
     },
     "xalma":{

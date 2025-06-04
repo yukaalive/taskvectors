@@ -1,0 +1,303 @@
+=== テストデータセットのテスト入力と出力 ===
+Dataset 1:
+  Test Input:  古い
+  Test Output:  old
+Dataset 2:
+  Test Input:  入る
+  Test Output:  enter
+Dataset 3:
+  Test Input:  かたい
+  Test Output:  hard
+Dataset 4:
+  Test Input:  特別な
+  Test Output:  special
+Dataset 5:
+  Test Input:  入る
+  Test Output:  enter
+Dataset 6:
+  Test Input:  おおう
+  Test Output:  cover
+Dataset 7:
+  Test Input:  個人の
+  Test Output:  private
+Dataset 8:
+  Test Input:  選ぶ
+  Test Output:  choose
+Dataset 9:
+  Test Input:  意見
+  Test Output:  opinion
+Dataset 10:
+  Test Input:  送る
+  Test Output:  send
+Dataset 11:
+  Test Input:  主張する
+  Test Output:  claim
+Dataset 12:
+  Test Input:  注意
+  Test Output:  attention
+Dataset 13:
+  Test Input:  手当て
+  Test Output:  treatment
+Dataset 14:
+  Test Input:  加える
+  Test Output:  add
+Dataset 15:
+  Test Input:  音
+  Test Output:  sound
+Dataset 16:
+  Test Input:  楽な
+  Test Output:  easy
+Dataset 17:
+  Test Input:  強い
+  Test Output:  strong
+Dataset 18:
+  Test Input:  焦点
+  Test Output:  focus
+Dataset 19:
+  Test Input:  取り除く
+  Test Output:  remove
+Dataset 20:
+  Test Input:  でさえ
+  Test Output:  even
+Dataset 21:
+  Test Input:  文化
+  Test Output:  culture
+Dataset 22:
+  Test Input:  投げる
+  Test Output:  throw
+Dataset 23:
+  Test Input:  クラス
+  Test Output:  class
+Dataset 24:
+  Test Input:  記憶
+  Test Output:  memory
+Dataset 25:
+  Test Input:  瞬間
+  Test Output:  moment
+Dataset 26:
+  Test Input:  いいえ
+  Test Output:  no
+Dataset 27:
+  Test Input:  すぐに
+  Test Output:  soon
+Dataset 28:
+  Test Input:  位置
+  Test Output:  position
+Dataset 29:
+  Test Input:  候補者
+  Test Output:  candidate
+Dataset 30:
+  Test Input:  息子
+  Test Output:  son
+Dataset 31:
+  Test Input:  口座
+  Test Output:  account
+Dataset 32:
+  Test Input:  歳
+  Test Output:  age
+Dataset 33:
+  Test Input:  心臓
+  Test Output:  heart
+Dataset 34:
+  Test Input:  代理店
+  Test Output:  agency
+Dataset 35:
+  Test Input:  に
+  Test Output:  at
+Dataset 36:
+  Test Input:  前方へ
+  Test Output:  forward
+Dataset 37:
+  Test Input:  滞在する
+  Test Output:  stay
+Dataset 38:
+  Test Input:  異なる
+  Test Output:  different
+Dataset 39:
+  Test Input:  統合
+  Test Output:  union
+Dataset 40:
+  Test Input:  明確な
+  Test Output:  clear
+Dataset 41:
+  Test Input:  声
+  Test Output:  voice
+Dataset 42:
+  Test Input:  救う
+  Test Output:  save
+Dataset 43:
+  Test Input:  女の子
+  Test Output:  girl
+Dataset 44:
+  Test Input:  光
+  Test Output:  light
+Dataset 45:
+  Test Input:  女の子
+  Test Output:  girl
+Dataset 46:
+  Test Input:  予測する
+  Test Output:  expect
+Dataset 47:
+  Test Input:  来る
+  Test Output:  come
+Dataset 48:
+  Test Input:  光
+  Test Output:  light
+Dataset 49:
+  Test Input:  ベッド
+  Test Output:  bed
+Dataset 50:
+  Test Input:  板材
+  Test Output:  board
+
+=== 開発データセットのテスト入力と出力 ===
+Dataset 1:
+  Test Input:  することができる
+  Test Output:  able
+Dataset 2:
+  Test Input:  参加する
+  Test Output:  join
+Dataset 3:
+  Test Input:  ぶら下がる
+  Test Output:  hang
+Dataset 4:
+  Test Input:  述べる
+  Test Output:  describe
+Dataset 5:
+  Test Input:  芸術家
+  Test Output:  artist
+Dataset 6:
+  Test Input:  財産
+  Test Output:  property
+Dataset 7:
+  Test Input:  若い
+  Test Output:  young
+Dataset 8:
+  Test Input:  気づく
+  Test Output:  notice
+Dataset 9:
+  Test Input:  議論
+  Test Output:  discussion
+Dataset 10:
+  Test Input:  費用
+  Test Output:  cost
+Dataset 11:
+  Test Input:  単一の
+  Test Output:  individual
+Dataset 12:
+  Test Input:  テレビ
+  Test Output:  tv
+Dataset 13:
+  Test Input:  ひとつ
+  Test Output:  article
+Dataset 14:
+  Test Input:  加える
+  Test Output:  add
+Dataset 15:
+  Test Input:  材料
+  Test Output:  material
+Dataset 16:
+  Test Input:  議会
+  Test Output:  congress
+Dataset 17:
+  Test Input:  そのように
+  Test Output:  so
+Dataset 18:
+  Test Input:  5
+  Test Output:  five
+Dataset 19:
+  Test Input:  高い
+  Test Output:  high
+Dataset 20:
+  Test Input:  自分自身の
+  Test Output:  own
+Dataset 21:
+  Test Input:  税金
+  Test Output:  tax
+Dataset 22:
+  Test Input:  会う
+  Test Output:  meet
+Dataset 23:
+  Test Input:  正しい
+  Test Output:  right
+Dataset 24:
+  Test Input:  続ける
+  Test Output:  continue
+Dataset 25:
+  Test Input:  ひとつ
+  Test Output:  article
+Dataset 26:
+  Test Input:  源
+  Test Output:  source
+Dataset 27:
+  Test Input:  手紙
+  Test Output:  letter
+Dataset 28:
+  Test Input:  遂行
+  Test Output:  performance
+Dataset 29:
+  Test Input:  投票
+  Test Output:  vote
+Dataset 30:
+  Test Input:  活動
+  Test Output:  activity
+Dataset 31:
+  Test Input:  １組
+  Test Output:  couple
+Dataset 32:
+  Test Input:  扱う
+  Test Output:  treat
+Dataset 33:
+  Test Input:  仕事
+  Test Output:  job
+Dataset 34:
+  Test Input:  遂行
+  Test Output:  performance
+Dataset 35:
+  Test Input:  尋ねる
+  Test Output:  ask
+Dataset 36:
+  Test Input:  平らな
+  Test Output:  level
+Dataset 37:
+  Test Input:  無料の
+  Test Output:  free
+Dataset 38:
+  Test Input:  聞こえる
+  Test Output:  hear
+Dataset 39:
+  Test Input:  大きい
+  Test Output:  large
+Dataset 40:
+  Test Input:  論議する
+  Test Output:  discuss
+Dataset 41:
+  Test Input:  十分な
+  Test Output:  enough
+Dataset 42:
+  Test Input:  届く
+  Test Output:  reach
+Dataset 43:
+  Test Input:  日
+  Test Output:  day
+Dataset 44:
+  Test Input:  経験
+  Test Output:  experience
+Dataset 45:
+  Test Input:  社会の
+  Test Output:  social
+Dataset 46:
+  Test Input:  地区
+  Test Output:  district
+Dataset 47:
+  Test Input:  から
+  Test Output:  off
+Dataset 48:
+  Test Input:  準備ができた
+  Test Output:  ready
+Dataset 49:
+  Test Input:  いっぱいの
+  Test Output:  full
+Dataset 50:
+  Test Input:  壁
+  Test Output:  wall
