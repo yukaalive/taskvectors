@@ -36,10 +36,10 @@ def save_json_file(data, output_file_path):
 # メイン処理
 def main():
     # 入力ファイルのパスを指定（ここを自分のファイルパスに変更してください）
-    input_file_path = '/home/yukaalive/2025workspace/task_vectors/quen/data/translation/ja_en.json'
+    input_file_path = '/home/yukaalive/2025workspace/task_vectors/2_icl_task_vectors/data/translation/en_ja.json'
     
     # ユーザーに出力ファイル名を尋ねる
-    output_file_name = '/home/yukaalive/2025workspace/task_vectors/quen/data/translation/en_ja.json'
+    output_file_name = '/home/yukaalive/2025workspace/task_vectors/2_icl_task_vectors/data/translation/ja_en.json'
     
     
     # 出力ファイル名が空の場合はデフォルト名を使用

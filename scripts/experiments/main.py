@@ -44,6 +44,77 @@ def evaluate_task(model: PreTrainedModel, tokenizer: PreTrainedTokenizer, task_n
     num_test_datasets, num_dev_datasets = 50, 50
     test_datasets = task.create_datasets(num_datasets=num_test_datasets, num_examples=num_examples)
     dev_datasets = task.create_datasets(num_datasets=num_dev_datasets, num_examples=num_examples)
+    
+    # デバッグ出力：データセットの内容を表示
+    print("\n=== Debug: Example Datasets ===")
+    print(f"テストデータセット総数: {len(test_datasets)}")
+    print(f"開発データセット総数: {len(dev_datasets)}")
+    print(f"各データセットのショット数: {num_examples}")
+    
+    # テストデータセットと開発データセットの重複を確認
+    test_inputs = [dataset.test_input for dataset in test_datasets]
+    test_outputs = [dataset.test_output for dataset in test_datasets]
+    dev_inputs = [dataset.test_input for dataset in dev_datasets]
+    dev_outputs = [dataset.test_output for dataset in dev_datasets]
+    
+    # 重複するテスト入力の数を計算
+    duplicates = set(test_inputs) & set(dev_inputs)
+    print(f"テストデータセットと開発データセットで重複するテスト入力の数: {len(duplicates)}")
+    
+    if len(duplicates) > 0:
+        print("重複するテスト入力の例（最大5つ）:")
+        for i, dup in enumerate(list(duplicates)[:5]):
+            print(f"  {i+1}: {dup}")
+    
+    # すべてのテスト入力と出力をファイルに保存
+    debug_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "debug")
+    os.makedirs(debug_dir, exist_ok=True)
+    
+    with open(os.path.join(debug_dir, f"{task_name}_test_inputs_outputs.txt"), "w") as f:
+        f.write("=== テストデータセットのテスト入力と出力 ===\n")
+        for i, (inp, out) in enumerate(zip(test_inputs, test_outputs)):
+            f.write(f"Dataset {i+1}:\n")
+            f.write(f"  Test Input: {inp}\n")
+            f.write(f"  Test Output: {out}\n")
+        
+        f.write("\n=== 開発データセットのテスト入力と出力 ===\n")
+        for i, (inp, out) in enumerate(zip(dev_inputs, dev_outputs)):
+            f.write(f"Dataset {i+1}:\n")
+            f.write(f"  Test Input: {inp}\n")
+            f.write(f"  Test Output: {out}\n")
+    
+    print(f"すべてのテスト入力と出力を {os.path.join(debug_dir, f'{task_name}_test_inputs_outputs.txt')} に保存しました")
+    
+    # expected_outputsの内容を確認
+    print("\n=== expected_outputs の内容 ===")
+    print(f"テストデータセットのexpected_outputs: {test_outputs}")
+    print(f"開発データセットのexpected_outputs: {dev_outputs}")
+    
+    # テストデータセットの最初の3つを表示
+    for i, dataset in enumerate(test_datasets[:3]):
+        print(f"\nTest Dataset {i+1}:")
+        print(f"  Test Input: {dataset.test_input}")
+        print(f"  Test Output: {dataset.test_output}")
+        print(f"  Train Inputs (Shots):")
+        for j, train_input in enumerate(dataset.train_inputs):
+            print(f"    {j+1}: {train_input}")
+        print(f"  Train Outputs:")
+        for j, train_output in enumerate(dataset.train_outputs):
+            print(f"    {j+1}: {train_output}")
+    
+    # 開発データセットの最初の3つを表示
+    for i, dataset in enumerate(dev_datasets[:3]):
+        print(f"\nDev Dataset {i+1}:")
+        print(f"  Test Input: {dataset.test_input}")
+        print(f"  Test Output: {dataset.test_output}")
+        print(f"  Train Inputs (Shots):")
+        for j, train_input in enumerate(dataset.train_inputs):
+            print(f"    {j+1}: {train_input}")
+        print(f"  Train Outputs:")
+        for j, train_output in enumerate(dataset.train_outputs):
+            print(f"    {j+1}: {train_output}")
+    
+    print("\n=== End Debug Output ===\n")
     icl_predictions = run_icl(model, tokenizer, task, test_datasets)
     tv_predictions, tv_dev_accuracy_by_layer, task_hiddens = run_task_vector(
         model,

@@ -1,0 +1,303 @@
+=== テストデータセットのテスト入力と出力 ===
+Dataset 1:
+  Test Input: eye
+  Test Output: 目
+Dataset 2:
+  Test Input: result
+  Test Output: 結果
+Dataset 3:
+  Test Input: material
+  Test Output: 材料
+Dataset 4:
+  Test Input: rock
+  Test Output: 岩
+Dataset 5:
+  Test Input: south
+  Test Output: 南
+Dataset 6:
+  Test Input: health
+  Test Output: 健康
+Dataset 7:
+  Test Input: quality
+  Test Output: 質
+Dataset 8:
+  Test Input: game
+  Test Output: ゲーム
+Dataset 9:
+  Test Input: body
+  Test Output: 体
+Dataset 10:
+  Test Input: power
+  Test Output: 力
+Dataset 11:
+  Test Input: image
+  Test Output: 像
+Dataset 12:
+  Test Input: nation
+  Test Output: 国家
+Dataset 13:
+  Test Input: attention
+  Test Output: 注意
+Dataset 14:
+  Test Input: college
+  Test Output: 大学
+Dataset 15:
+  Test Input: road
+  Test Output: 道路
+Dataset 16:
+  Test Input: dream
+  Test Output: 夢
+Dataset 17:
+  Test Input: yet
+  Test Output: まだ
+Dataset 18:
+  Test Input: side
+  Test Output: 側
+Dataset 19:
+  Test Input: wall
+  Test Output: 壁
+Dataset 20:
+  Test Input: good
+  Test Output: 良い
+Dataset 21:
+  Test Input: be
+  Test Output: ある
+Dataset 22:
+  Test Input: rock
+  Test Output: 岩
+Dataset 23:
+  Test Input: good
+  Test Output: 良い
+Dataset 24:
+  Test Input: place
+  Test Output: 場所
+Dataset 25:
+  Test Input: case
+  Test Output: 場合
+Dataset 26:
+  Test Input: daughter
+  Test Output: 娘
+Dataset 27:
+  Test Input: example
+  Test Output: 例
+Dataset 28:
+  Test Input: issue
+  Test Output: 出す
+Dataset 29:
+  Test Input: phone
+  Test Output: 電話
+Dataset 30:
+  Test Input: good
+  Test Output: 良い
+Dataset 31:
+  Test Input: hospital
+  Test Output: 病院
+Dataset 32:
+  Test Input: east
+  Test Output: 東
+Dataset 33:
+  Test Input: box
+  Test Output: 箱
+Dataset 34:
+  Test Input: eye
+  Test Output: 目
+Dataset 35:
+  Test Input: point
+  Test Output: 点
+Dataset 36:
+  Test Input: difference
+  Test Output: 違い
+Dataset 37:
+  Test Input: child
+  Test Output: 子供
+Dataset 38:
+  Test Input: husband
+  Test Output: 夫
+Dataset 39:
+  Test Input: man
+  Test Output: 男
+Dataset 40:
+  Test Input: light
+  Test Output: 光
+Dataset 41:
+  Test Input: wall
+  Test Output: 壁
+Dataset 42:
+  Test Input: plant
+  Test Output: 植物
+Dataset 43:
+  Test Input: quality
+  Test Output: 質
+Dataset 44:
+  Test Input: now
+  Test Output: 今
+Dataset 45:
+  Test Input: site
+  Test Output: 位置
+Dataset 46:
+  Test Input: culture
+  Test Output: 文化
+Dataset 47:
+  Test Input: part
+  Test Output: 部分
+Dataset 48:
+  Test Input: market
+  Test Output: 市場
+Dataset 49:
+  Test Input: night
+  Test Output: 夜
+Dataset 50:
+  Test Input: wall
+  Test Output: 壁
+
+=== 開発データセットのテスト入力と出力 ===
+Dataset 1:
+  Test Input: term
+  Test Output: 期間
+Dataset 2:
+  Test Input: be
+  Test Output: ある
+Dataset 3:
+  Test Input: issue
+  Test Output: 出す
+Dataset 4:
+  Test Input: man
+  Test Output: 男
+Dataset 5:
+  Test Input: point
+  Test Output: 点
+Dataset 6:
+  Test Input: section
+  Test Output: 部分
+Dataset 7:
+  Test Input: room
+  Test Output: 部屋
+Dataset 8:
+  Test Input: voice
+  Test Output: 声
+Dataset 9:
+  Test Input: south
+  Test Output: 南
+Dataset 10:
+  Test Input: night
+  Test Output: 夜
+Dataset 11:
+  Test Input: point
+  Test Output: 点
+Dataset 12:
+  Test Input: government
+  Test Output: 政府
+Dataset 13:
+  Test Input: patient
+  Test Output: 患者
+Dataset 14:
+  Test Input: professor
+  Test Output: 教授
+Dataset 15:
+  Test Input: night
+  Test Output: 夜
+Dataset 16:
+  Test Input: hospital
+  Test Output: 病院
+Dataset 17:
+  Test Input: point
+  Test Output: 点
+Dataset 18:
+  Test Input: place
+  Test Output: 場所
+Dataset 19:
+  Test Input: sport
+  Test Output: 運動
+Dataset 20:
+  Test Input: research
+  Test Output: 研究
+Dataset 21:
+  Test Input: money
+  Test Output: 金
+Dataset 22:
+  Test Input: movement
+  Test Output: 運動
+Dataset 23:
+  Test Input: foot
+  Test Output: 足
+Dataset 24:
+  Test Input: rock
+  Test Output: 岩
+Dataset 25:
+  Test Input: professor
+  Test Output: 教授
+Dataset 26:
+  Test Input: sport
+  Test Output: 運動
+Dataset 27:
+  Test Input: section
+  Test Output: 部分
+Dataset 28:
+  Test Input: attention
+  Test Output: 注意
+Dataset 29:
+  Test Input: dream
+  Test Output: 夢
+Dataset 30:
+  Test Input: material
+  Test Output: 材料
+Dataset 31:
+  Test Input: rock
+  Test Output: 岩
+Dataset 32:
+  Test Input: science
+  Test Output: 科学
+Dataset 33:
+  Test Input: detail
+  Test Output: 詳細
+Dataset 34:
+  Test Input: minute
+  Test Output: 分
+Dataset 35:
+  Test Input: dream
+  Test Output: 夢
+Dataset 36:
+  Test Input: need
+  Test Output: 必要
+Dataset 37:
+  Test Input: society
+  Test Output: 社会
+Dataset 38:
+  Test Input: information
+  Test Output: 情報
+Dataset 39:
+  Test Input: now
+  Test Output: 今
+Dataset 40:
+  Test Input: south
+  Test Output: 南
+Dataset 41:
+  Test Input: technology
+  Test Output: 技術
+Dataset 42:
+  Test Input: life
+  Test Output: 生命
+Dataset 43:
+  Test Input: data
+  Test Output: データ
+Dataset 44:
+  Test Input: attention
+  Test Output: 注意
+Dataset 45:
+  Test Input: tree
+  Test Output: 木
+Dataset 46:
+  Test Input: wall
+  Test Output: 壁
+Dataset 47:
+  Test Input: success
+  Test Output: 成功
+Dataset 48:
+  Test Input: movement
+  Test Output: 運動
+Dataset 49:
+  Test Input: option
+  Test Output: 選択
+Dataset 50:
+  Test Input: guy
+  Test Output: 人

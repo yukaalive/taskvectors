@@ -5,16 +5,14 @@ TASKS_TO_EVALUATE = [
 
 MODELS_TO_EVALUATE = [
      ("youko","8B"),
-    ("quen","14B"),
-    # ("nekomata","7B"),
-    # ("llm-jp","13B"),
-    ("shallow","7B"),
-    ("xalma","13B"),
-    # ("minillm", "7B"),
-    ("llama", "7B"),
-    ("llama", "13B"),
-    ("pythia","2.8B"),
-    ("pythia","12B"),
-    ("gpt-j","6B"),
+    # ("Qwen","14B"),
+    # ("Qwen","14B_j"),
+    # ("swallow","7B"),
+    # ("xalma","13B"),
+    # ("llama", "7B"),
+    # ("llama", "13B"),
+    # ("pythia","2.8B"),
+    # ("pythia","12B"),
+    # ("gpt-j","6B"),
 ]
 

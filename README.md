@@ -4,12 +4,10 @@
 
 
 
-
-
-
-
-
-
+cp * /home/user/backup/
+rm *.pkl
+export PYTHONPATH=/home/yukaalive/2025workspace/task_vectors/quen:$PYTHONPATH
+python scripts/figures/main.py
 
 
 # In-Context Learning Creates Task Vectors
