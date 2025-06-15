@@ -70,51 +70,49 @@ def evaluate_task(model: PreTrainedModel, tokenizer: PreTrainedTokenizer, task_n
     debug_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "debug")
     os.makedirs(debug_dir, exist_ok=True)
     
-    with open(os.path.join(debug_dir, f"{task_name}_test_inputs_outputs.txt"), "w") as f:
-        f.write("=== テストデータセットのテスト入力と出力 ===\n")
-        for i, (inp, out) in enumerate(zip(test_inputs, test_outputs)):
-            f.write(f"Dataset {i+1}:\n")
-            f.write(f"  Test Input: {inp}\n")
-            f.write(f"  Test Output: {out}\n")
+    # with open(os.path.join(debug_dir, f"{task_name}_test_inputs_outputs.txt"), "w") as f:
+    #     f.write("=== テストデータセットのテスト入力と出力 ===\n")
+    #     for i, (inp, out) in enumerate(zip(test_inputs, test_outputs)):
+    #         f.write(f"Dataset {i+1}:\n")
+    #         f.write(f"  Test Input: {inp}\n")
+    #         f.write(f"  Test Output: {out}\n")
         
-        f.write("\n=== 開発データセットのテスト入力と出力 ===\n")
-        for i, (inp, out) in enumerate(zip(dev_inputs, dev_outputs)):
-            f.write(f"Dataset {i+1}:\n")
-            f.write(f"  Test Input: {inp}\n")
-            f.write(f"  Test Output: {out}\n")
+    #     f.write("\n=== 開発データセットのテスト入力と出力 ===\n")
+    #     for i, (inp, out) in enumerate(zip(dev_inputs, dev_outputs)):
+    #         f.write(f"Dataset {i+1}:\n")
+    #         f.write(f"  Test Input: {inp}\n")
+    #         f.write(f"  Test Output: {out}\n")
     
-    print(f"すべてのテスト入力と出力を {os.path.join(debug_dir, f'{task_name}_test_inputs_outputs.txt')} に保存しました")
     
-    # expected_outputsの内容を確認
-    print("\n=== expected_outputs の内容 ===")
-    print(f"テストデータセットのexpected_outputs: {test_outputs}")
-    print(f"開発データセットのexpected_outputs: {dev_outputs}")
+    # # expected_outputsの内容を確認
+    # print("\n=== expected_outputs の内容 ===")
+    # print(f"テストデータセットのexpected_outputs: {test_outputs}")
+    # print(f"開発データセットのexpected_outputs: {dev_outputs}")
     
-    # テストデータセットの最初の3つを表示
-    for i, dataset in enumerate(test_datasets[:3]):
-        print(f"\nTest Dataset {i+1}:")
-        print(f"  Test Input: {dataset.test_input}")
-        print(f"  Test Output: {dataset.test_output}")
-        print(f"  Train Inputs (Shots):")
-        for j, train_input in enumerate(dataset.train_inputs):
-            print(f"    {j+1}: {train_input}")
-        print(f"  Train Outputs:")
-        for j, train_output in enumerate(dataset.train_outputs):
-            print(f"    {j+1}: {train_output}")
+    # # テストデータセットの最初の3つを表示
+    # for i, dataset in enumerate(test_datasets[:3]):
+    #     print(f"\nTest Dataset {i+1}:")
+    #     print(f"  Test Input: {dataset.test_input}")
+    #     print(f"  Test Output: {dataset.test_output}")
+    #     print(f"  Train Inputs (Shots):")
+    #     for j, train_input in enumerate(dataset.train_inputs):
+    #         print(f"    {j+1}: {train_input}")
+    #     print(f"  Train Outputs:")
+    #     for j, train_output in enumerate(dataset.train_outputs):
+    #         print(f"    {j+1}: {train_output}")
     
-    # 開発データセットの最初の3つを表示
-    for i, dataset in enumerate(dev_datasets[:3]):
-        print(f"\nDev Dataset {i+1}:")
-        print(f"  Test Input: {dataset.test_input}")
-        print(f"  Test Output: {dataset.test_output}")
-        print(f"  Train Inputs (Shots):")
-        for j, train_input in enumerate(dataset.train_inputs):
-            print(f"    {j+1}: {train_input}")
-        print(f"  Train Outputs:")
-        for j, train_output in enumerate(dataset.train_outputs):
-            print(f"    {j+1}: {train_output}")
+    # # 開発データセットの最初の3つを表示
+    # for i, dataset in enumerate(dev_datasets[:3]):
+    #     print(f"\nDev Dataset {i+1}:")
+    #     print(f"  Test Input: {dataset.test_input}")
+    #     print(f"  Test Output: {dataset.test_output}")
+    #     print(f"  Train Inputs (Shots):")
+    #     for j, train_input in enumerate(dataset.train_inputs):
+    #         print(f"    {j+1}: {train_input}")
+    #     print(f"  Train Outputs:")
+    #     for j, train_output in enumerate(dataset.train_outputs):
+    #         print(f"    {j+1}: {train_output}")
     
-    print("\n=== End Debug Output ===\n")
     icl_predictions = run_icl(model, tokenizer, task, test_datasets)
     tv_predictions, tv_dev_accuracy_by_layer, task_hiddens = run_task_vector(
         model,

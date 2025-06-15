@@ -30,7 +30,7 @@ def run_icl(
 ) -> List[str]:
     format_dataset_kwargs = {"include_train": include_train}
     inputs = tokenize_datasets(tokenizer, test_datasets, format_dataset_kwargs=format_dataset_kwargs)
-    new_ids = batch_generate(model, tokenizer, inputs=inputs, generate_kwargs={"max_new_tokens": 1})
+    new_ids = batch_generate(model, tokenizer, inputs=inputs, generate_kwargs={"max_new_tokens": 10})
     predictions = decode_predictions(new_ids, tokenizer)
 
     return predictions
@@ -192,8 +192,15 @@ def modulated_generate(
         intermediate_layer=intermediate_layer,
         past_key_values=past_key_values,
     )
-    first_predicted_token_ids = first_forward_outputs.logits[:, -1].argmax(dim=-1).unsqueeze(-1)
-    answers = decode_predictions(first_predicted_token_ids, tokenizer)
+    
+    # 複数トークン生成を有効にする
+    answers = continue_generation(
+        model,
+        tokenizer,
+        inputs,
+        first_forward_outputs,
+        test_datasets,
+    )
 
     if return_task_hiddens:
         return answers, task_hiddens
@@ -314,8 +321,10 @@ def continue_generation(
     test_datasets: List[FewShotDataset],
 ) -> List[str]:
     """
-    Continue generation after the first token. This is currently not supported.
+    Continue generation after the first token to generate multiple tokens.
     """
+    device = model.device
+    
     first_predicted_token_ids = first_forward_outputs.logits[:, -1].argmax(dim=-1).unsqueeze(-1)
 
     new_input_ids = first_predicted_token_ids
@@ -324,12 +333,19 @@ def continue_generation(
     full_input_ids = torch.cat([inputs["input_ids"], new_input_ids], dim=-1)
     full_attention_mask = torch.cat([inputs["attention_mask"], new_attention_mask], dim=-1)
 
-    # full_input_ids = new_input_ids
-    # full_attention_mask = new_attention_mask
+    # デバイスに移動
+    full_input_ids = full_input_ids.to(device)
+    full_attention_mask = full_attention_mask.to(device)
 
     past_key_values = first_forward_outputs.past_key_values
+    # past_key_valuesもデバイスに移動
+    if past_key_values is not None:
+        past_key_values = nested_apply(
+            past_key_values, 
+            lambda x: x.to(device) if isinstance(x, torch.Tensor) else x
+        )
 
-    max_new_tokens = 1  # Right now we don't support multi-token outputs
+    max_new_tokens = 10  # Generate up to 30 tokens for multi-token outputs
 
     if max_new_tokens > 0:
         output_ids = model.generate(
@@ -338,11 +354,14 @@ def continue_generation(
             max_new_tokens=max_new_tokens,
             past_key_values=past_key_values,
             pad_token_id=tokenizer.pad_token_id,
+            eos_token_id=tokenizer.eos_token_id,
+            repetition_penalty=1.1,
         )
     else:
         output_ids = full_input_ids
 
     new_ids = output_ids[:, inputs["input_ids"].shape[-1] :]
     answers = decode_predictions(new_ids, tokenizer)
+   
 
     return answers

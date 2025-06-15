@@ -1,6 +1,7 @@
 import math
 import os
 from typing import Literal, Tuple
+from peft import PeftModel
 
 import torch
 from transformers import AutoConfig, AutoModelForCausalLM, AutoTokenizer, PreTrainedModel, PreTrainedTokenizer
@@ -50,6 +51,20 @@ def get_local_path(model_type: str, model_variant: str) -> str:
 def get_model_path(model_type: str, model_variant: str) -> str:
     model_path = MODEL_PATHS[model_type][model_variant]
     return model_path
+
+
+def get_latest_checkpoint_path(base_path: str) -> str:
+    """最新のチェックポイントディレクトリを取得"""
+    if not os.path.exists(base_path):
+        raise ValueError(f"Base path does not exist: {base_path}")
+    
+    checkpoint_dirs = [d for d in os.listdir(base_path) if d.startswith('checkpoint-') and os.path.isdir(os.path.join(base_path, d))]
+    if not checkpoint_dirs:
+        raise ValueError(f"No checkpoint directories found in {base_path}")
+    
+    # 数字部分でソートして最新を取得
+    latest = max(checkpoint_dirs, key=lambda x: int(x.split('-')[1]))
+    return os.path.join(base_path, latest)
 
 
 def _get_falcon_device_map() -> dict[str, int]:
@@ -106,10 +121,34 @@ def load_model(model_type: str, model_variant: str):
 
     kwargs = GPU_KWARGS.copy()  # 元のディクショナリをコピー
     
-    # nekomataモデルの場合、trust_remote_code=Trueを追加（すでにBASE_KWARGSに含まれている）
-    kwargs["device_map"] = _create_device_map(model_path)
-
-    model = AutoModelForCausalLM.from_pretrained(model_path, **kwargs)
+    # ファインチューニングしたモデルの場合
+    if model_type == "Qwen" and model_variant == "14B_j_sft":
+        # ベースモデルのパス
+        base_model_path = "cyberagent/DeepSeek-R1-Distill-Qwen-14B-Japanese"
+        kwargs["device_map"] = _create_device_map(base_model_path)
+        
+        print(f"Loading base model: {base_model_path}")
+        model = AutoModelForCausalLM.from_pretrained(base_model_path, **kwargs)
+        
+        # LoRAアダプターのパスを取得
+        ft_base_path = "/home/yukaalive/2025workspace/task_vectors/4_icl_task_vectors/data/translation/deepseek_qwen_fine_tuned"
+        try:
+            lora_adapter_path = get_latest_checkpoint_path(ft_base_path)
+            print(f"Loading LoRA adapter from: {lora_adapter_path}")
+            
+            # LoRAアダプターを適用
+            model = PeftModel.from_pretrained(model, lora_adapter_path)
+            model = model.merge_and_unload()  # LoRAアダプターをマージして通常のモデルに変換
+            print("LoRA adapter successfully merged")
+            
+        except Exception as e:
+            print(f"Warning: Failed to load LoRA adapter: {e}")
+            print("Using base model without fine-tuning")
+    else:
+        # nekomataモデルの場合、trust_remote_code=Trueを追加（すでにBASE_KWARGSに含まれている）
+        kwargs["device_map"] = _create_device_map(model_path)
+        model = AutoModelForCausalLM.from_pretrained(model_path, **kwargs)
+    
     model = model.eval()  # check if this is necessary
 
     return model
@@ -121,8 +160,16 @@ def load_tokenizer(model_type: str, model_variant: str) -> PreTrainedTokenizer:
     model_paty = get_model_path(model_type, model_variant)
     #tokenizer = AutoTokenizer.from_pretrained(model_path, padding_side="left")
     
+    # ファインチューニングしたモデルの場合
+    if model_type == "Qwen" and model_variant == "14B_j_sft":
+        # ベースモデルのトークナイザーを使用
+        base_model_path = "cyberagent/DeepSeek-R1-Distill-Qwen-14B-Japanese"
+        tokenizer = AutoTokenizer.from_pretrained(base_model_path, padding_side="left", trust_remote_code=True)
     # nekomataモデルの場合だけtrust_remote_code=Trueを追加
-    if model_type == "nekomata":
+    elif model_type == "nekomata":
+        tokenizer = AutoTokenizer.from_pretrained(model_path, padding_side="left", trust_remote_code=True)
+    # Qwenモデルの場合もtrust_remote_code=Trueを追加
+    elif model_type == "Qwen":
         tokenizer = AutoTokenizer.from_pretrained(model_path, padding_side="left", trust_remote_code=True)
     else:
         tokenizer = AutoTokenizer.from_pretrained(model_path, padding_side="left")
@@ -150,7 +197,8 @@ MODEL_PATHS = {
     },
     "Qwen":{
         "14B_j": "cyberagent/DeepSeek-R1-Distill-Qwen-14B-Japanese",
-        "14B" : "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B"
+        "14B" : "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B",
+        "14B_j_sft": "/home/yukaalive/2025workspace/task_vectors/4_icl_task_vectors/data/translation/deepseek_qwen_fine_tuned"
         
     },
     "youko":{

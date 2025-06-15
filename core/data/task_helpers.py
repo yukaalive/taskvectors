@@ -22,9 +22,13 @@ TASK_TYPE_TO_CLASS = {
 
 ALL_TASKS = {
     "translation_ja_en": {
-        "task_type": "translation",
-        "task_kwargs": {"mapping_type": "translation", "mapping_name": "ja_en"},
+    "task_type": "translation",
+    "task_kwargs": {"mapping_type": "translation", "mapping_name": "ja_en", "is_sentence_level": True},
     },
+    # "translation_ja_en": {
+    #     "task_type": "translation",
+    #     "task_kwargs": {"mapping_type": "translation", "mapping_name": "ja_en"},
+    # },
     "translation_en_ja": {
         "task_type": "translation",
         "task_kwargs": {"mapping_type": "translation", "mapping_name": "en_ja"},
