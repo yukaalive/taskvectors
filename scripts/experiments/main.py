@@ -45,11 +45,11 @@ def evaluate_task(model: PreTrainedModel, tokenizer: PreTrainedTokenizer, task_n
     test_datasets = task.create_datasets(num_datasets=num_test_datasets, num_examples=num_examples)
     dev_datasets = task.create_datasets(num_datasets=num_dev_datasets, num_examples=num_examples)
     
-    # デバッグ出力：データセットの内容を表示
-    print("\n=== Debug: Example Datasets ===")
-    print(f"テストデータセット総数: {len(test_datasets)}")
-    print(f"開発データセット総数: {len(dev_datasets)}")
-    print(f"各データセットのショット数: {num_examples}")
+    # # デバッグ出力：データセットの内容を表示
+    # print("\n=== Debug: Example Datasets ===")
+    # print(f"テストデータセット総数: {len(test_datasets)}")
+    # print(f"開発データセット総数: {len(dev_datasets)}")
+    # print(f"各データセットのショット数: {num_examples}")
     
     # テストデータセットと開発データセットの重複を確認
     test_inputs = [dataset.test_input for dataset in test_datasets]
@@ -59,12 +59,12 @@ def evaluate_task(model: PreTrainedModel, tokenizer: PreTrainedTokenizer, task_n
     
     # 重複するテスト入力の数を計算
     duplicates = set(test_inputs) & set(dev_inputs)
-    print(f"テストデータセットと開発データセットで重複するテスト入力の数: {len(duplicates)}")
+    # print(f"テストデータセットと開発データセットで重複するテスト入力の数: {len(duplicates)}")
     
-    if len(duplicates) > 0:
-        print("重複するテスト入力の例（最大5つ）:")
-        for i, dup in enumerate(list(duplicates)[:5]):
-            print(f"  {i+1}: {dup}")
+    # if len(duplicates) > 0:
+    #     print("重複するテスト入力の例（最大5つ）:")
+    #     for i, dup in enumerate(list(duplicates)[:5]):
+    #         print(f"  {i+1}: {dup}")
     
     # すべてのテスト入力と出力をファイルに保存
     debug_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "debug")
