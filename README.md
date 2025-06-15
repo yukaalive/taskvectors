@@ -1,5 +1,17 @@
 ./run_script.sh experiments.main
+# fine-tuning
+nohup python sft20250614_fixed.py > log.out &
 
+
+
+# プロセス確認
+bashps aux | grep sft20250614_fixed.py
+# プロセス停止
+bashkill 27791
+# 停止確認
+bashps aux | grep sft20250614_fixed.py
+# バックグラウンドでの実行
+#bashnohup python sft20250614_fixed.py > log.out &
 
 
 
